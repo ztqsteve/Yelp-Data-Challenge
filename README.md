@@ -1,4 +1,4 @@
-# Yelp-Data-Challenge
+# Yelp Data Challenge
 Apply machine learning algorithms to data analysis,modeling and recommender system for hands-on practice.
 ## Dataset Introduction
 https://www.yelp.com/dataset_challenge
