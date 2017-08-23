@@ -10,7 +10,7 @@ The Challenge Dataset:
   200,000 pictures from the included businesses
 
 Cities:
-  U.K.: Edinburgh
+  U.K.: Edinburgh 
   Germany: Karlsruhe
   Canada: Montreal and Waterloo
   U.S.: Pittsburgh, Charlotte, Urbana-Champaign, Phoenix, Las Vegas, Madison, Cleveland
