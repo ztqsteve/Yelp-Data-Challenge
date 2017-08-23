@@ -15,13 +15,20 @@ https://www.yelp.com/dataset_challenge
 
 ### Cities:
   U.K.: Edinburgh 
+  
   Germany: Karlsruhe
+  
   Canada: Montreal and Waterloo
+  
   U.S.: Pittsburgh, Charlotte, Urbana-Champaign, Phoenix, Las Vegas, Madison, Cleveland
 
 ### Files:
   yelp_academic_dataset_business.json
+  
   yelp_academic_dataset_checkin.json
+  
   yelp_academic_dataset_review.json
+  
   yelp_academic_dataset_tip.json
+  
   yelp_academic_dataset_user.json
