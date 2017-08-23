@@ -1,12 +1,15 @@
 # Yelp-Data-Challenge
-Apply machine learning algorithms to yelp data challenge dataset for data analysis,modeling and recommender system.
-# Dataset Introduction
+Apply machine learning algorithms to yelp data challenge dataset for data analysis,modeling and recommender system for hands-on practise.
+## Dataset Introduction
 https://www.yelp.com/dataset_challenge
 
 The Challenge Dataset:
   4.1M reviews and 947K tips by 1M users for 144K businesses
-  1.1M business attributes, e.g., hours, parking availability, ambience.
+  
+  1.1M business attributes, e.g., hours, parking availability, ambience
+  
   Aggregated check-ins over time for each of the 125K businesses
+  
   200,000 pictures from the included businesses
 
 Cities:
