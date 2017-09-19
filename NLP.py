@@ -97,31 +97,3 @@ for i in range(kmeans.n_clusters):
         print 'rate:%d -' % df.ix[reviews]['stars'],
         print "    %s" % df.ix[reviews]['text']
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
