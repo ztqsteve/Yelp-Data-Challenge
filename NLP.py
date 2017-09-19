@@ -1,4 +1,6 @@
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 from sklearn.cross_validation import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import cross_val_score
@@ -6,6 +8,11 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import precision_score, accuracy_score, recall_score, f1_score, roc_auc_score
+from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_score
+
+
+plt.style.use("ggplot")
 
 df = pd.read_csv('data/last_2_years_restaurant_reviews.csv')
 
@@ -24,6 +31,7 @@ vectorizer = TfidfVectorizer(stop_words = "english", max_features = 5000)
 vectors_train = vectorizer.fit_transform(documents_train).toarray()
 words = vectorizer.get_feature_names()
 vectors_test = vectorizer.transform(documents_test).toarray()
+vectors_all = vectorizer.transform(documents).toarray()
 
 # Use cross validation to evaluate classifiers
 lr = LogisticRegression()
@@ -56,3 +64,64 @@ def print_results(y_true, y_pred):
 
 print("Test set scores:")
 print_results(target_test, target_test_pred)
+
+# ------------Cluster--------------
+def choose_k_cluster(train_data,test_data,max_cluster_num):
+	'''
+	choose number of cluster by silhouette score
+	'''
+	K=range(2,max_cluster_num+1)
+	kmeans = [KMeans(n_clusters=k,max_iter=2000,random_state=113) for k in K]
+	[models.fit(train_data) for models in kmeans]
+	assigned_cluster = [models.predict(test_data) for models in kmeans]
+	s_score = [silhouette_score(test_data, assigned_cluster[i]) for i in range(0,max_cluster_num-1)]
+	plt.plot(K,s_score)
+    return np.argmax(s_score)+2
+
+n_clusters = choose_k_cluster(vectors_train, vectors_all, 20)
+kmeans = KMeans(n_clusters=n_clusters)
+kmeans.fit(vectors_train)
+
+top_centroids = kmeans.cluster_centers_.argsort()[:,-1:-11:-1]
+print "top features for each cluster:"
+for num, centroid in enumerate(top_centroids):
+    print "%d: %s" % (num, ", ".join(words[i] for i in centroid))
+
+#Print out the rating and review of a random sample of the reviews assigned to each cluster to get a sense of the cluster.
+assigned_cluster = kmeans.predict(vectors_all)
+for i in range(kmeans.n_clusters):
+    cluster = np.arange(0, vectors_all.shape[0])[assigned_cluster==i]
+    sample_reviews = np.random.choice(cluster, 3, replace=False)
+    print "cluster %d:" % i
+    for reviews in sample_reviews:
+        print 'rate:%d -' % df.ix[reviews]['stars'],
+        print "    %s" % df.ix[reviews]['text']
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
